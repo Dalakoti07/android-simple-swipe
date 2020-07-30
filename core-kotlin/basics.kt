@@ -58,8 +58,10 @@ fun main() {
         
 }
 
+/*
 class Person(name:String,des:String){
     init{
         // some code that u want to run as soon as construct is called 
     }
 }
+ */
