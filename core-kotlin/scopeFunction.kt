@@ -1,3 +1,7 @@
+// credits https://blog.mindorks.com/using-scoped-functions-in-kotlin-let-run-with-also-apply
+// https://blog.mindorks.com/learn-kotlin-apply-vs-with
+
+
 // some scope function are let,apply, also, with
 // these function run in context with object and object can be refered via this or it
 
@@ -108,3 +112,8 @@
         it>3
     }
 */
+
+// foreach
+// listOfMindOrks.forEach {
+//     Log.d(TAG,it)
+//  }

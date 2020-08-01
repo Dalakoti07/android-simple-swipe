@@ -65,3 +65,91 @@ class Person(name:String,des:String){
     }
 }
  */
+
+
+
+//  LAbels in kotlin
+/*
+    Labels
+    Any expression written in Kotlin is called labels. 
+    For example, if we are having a for-loop in our Kotlin code then we can name that for-loop expression as a label and 
+    will use the label name for the for-loop. So, basically we are giving one name to the for-loop and by doing so whenever we
+    want to call the same for-loop, we can just call it by the label name.
+
+    We can create a label by using an identifier followed by the “@” sign. For example, name@, loop@, xyz@, etc.
+
+    Following is an example of a label:
+
+    loop@ for (i in 1..10) {
+        // some code goes here
+    }
+
+*/
+
+// Also, all properties in Kotlin are final by default.
+
+// Getter and setters in kotlin
+/*
+    class Community {
+        var name: String = "MindOrks"
+    }
+
+    as as below
+    class Community {
+    var name: String = "MindOrks"
+        get() = field                     // getter
+        set(value) { field = value }      // setter
+    }
+*/
+
+// A more tough example
+/*
+    // java code
+    class Community {
+        //private variable
+        private String name;
+        private String startingDate;
+        private String desc; //description of community
+
+        //getter for desc
+        public getDesc() {
+            return name + " " + startingDate;
+        }
+
+        //setter for name
+        public setDesc(String desc) {
+            String descArray[] = desc.split(" ");
+            name = descArray[0];
+            startingDate = descArray[1];
+        }
+    }
+*/
+
+/*
+    private lateinit var name: String
+    private lateinit var startingDate: String
+    var desc: String
+        get() = name + " " + startingDate
+        set(value) {
+            val descArray = value.split(" ".toRegex())
+            name = descArray[0]
+            startingDate = descArray[1]
+        }
+
+*/
+
+// safe calls in kotlin
+studentA?.giveGoodies() 
+// above giveGoodeis() func will only be called when studentA is not null
+/*
+Safe calls are generally used in chains. For example, if you want to find the instructor name of 
+a particular student A enrolled in some course (or not enrolled) then you can do so by: 
+*/
+studentA?.courseName?.instructor?.name 
+
+// !! is also used
+/*
+    The basic difference between the Safe call and Null check is that we use Null checks (!!) only 
+    when we are confident that the property can’t have a null value.
+    And if we are not sure that the value of the property is null or not then we prefer to use Safe calls(?.).
+*/
