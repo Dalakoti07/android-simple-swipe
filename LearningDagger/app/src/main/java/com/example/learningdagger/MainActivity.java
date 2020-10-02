@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.example.learningdagger.car.Car;
 import com.example.learningdagger.di.CarComponent;
+import com.example.learningdagger.di.DaggerCarComponent;
+import com.example.learningdagger.di.DieselEngineModule;
 
 import javax.inject.Inject;
 
@@ -20,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // daggerCarComponent is created when we do build
-        CarComponent component = DaggerCarComponent.create();
+        CarComponent component = DaggerCarComponent.builder()
+                .dieselEngineModule(new DieselEngineModule(100))
+                .build();
 //        car = component.getCar(); // not using field injection, using method
 //        using field injection
         component.inject(this);
