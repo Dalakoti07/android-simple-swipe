@@ -1,6 +1,4 @@
-package com.example.learningdagger;
-
-import javax.inject.Inject;
+package com.example.learningdagger.car;
 
 public class Wheels {
     //we don't own this class so we can't annotate it with @Inject

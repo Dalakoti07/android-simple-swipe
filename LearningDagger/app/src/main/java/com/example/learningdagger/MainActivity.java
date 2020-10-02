@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.learningdagger.car.Car;
+import com.example.learningdagger.di.CarComponent;
+
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 //        car = component.getCar(); // not using field injection, using method
 //        using field injection
         component.inject(this);
+
         car.drive();
     }
 }
