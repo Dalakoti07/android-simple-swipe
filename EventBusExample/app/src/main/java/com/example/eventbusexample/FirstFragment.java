@@ -38,11 +38,14 @@ public class FirstFragment extends Fragment {
         TextInputEditText inputEditText = view.findViewById(R.id.textInputText);
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
             @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                EventBus.getDefault().post(charSequence.toString());
+                RxBus.getInstance().publish(charSequence.toString());
             }
+
             @Override public void afterTextChanged(Editable editable) {
+
             }
         });
     }

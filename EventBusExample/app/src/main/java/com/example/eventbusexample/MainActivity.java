@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
+    // this thing can be implemented using rxjava also, see other branch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

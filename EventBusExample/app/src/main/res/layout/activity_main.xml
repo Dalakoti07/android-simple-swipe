@@ -18,7 +18,7 @@
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="10dp"
-            android:text="@string/app_name"
+            android:text="Fragment examples"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             />
         <com.google.android.material.tabs.TabLayout
