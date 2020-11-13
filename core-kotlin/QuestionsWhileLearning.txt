@@ -1,0 +1,4 @@
+why use coordinate layout
+
+ViewPager2 is same as recyclerview same adapter as of recyclerview adapter
+
