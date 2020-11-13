@@ -1,5 +1,3 @@
-This repository contains the android learning lessons from mindork - https://mindorks.com/android-tutorial
+This repository contains implementation from various blog posts
 
-Topics covered are Core Kotlin and Android best practises
-
-Thanks mindork team
+Several branch contain various features and implementations
