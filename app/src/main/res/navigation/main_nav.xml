@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/sampleFragment">
+
+    <fragment
+        android:id="@+id/sampleFragment"
+        android:name="com.dalakoti07.android.frags.SampleFragment"
+        android:label="SampleFragment" >
+        <action
+            android:id="@+id/action_sampleFragment_to_sampleBottomSheet"
+            app:destination="@id/sampleBottomSheet" />
+    </fragment>
+    <dialog
+        android:id="@+id/sampleBottomSheet"
+        android:name="com.dalakoti07.android.frags.SampleBottomSheet"
+        android:label="SampleBottomSheet" >
+        <action
+            android:id="@+id/action_sampleBottomSheet_to_sampleDialogFragment"
+            app:destination="@id/sampleDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/sampleDialogFragment"
+        android:name="com.dalakoti07.android.frags.SampleDialogFragment"
+        android:label="SampleDialogFragment" />
+</navigation>
