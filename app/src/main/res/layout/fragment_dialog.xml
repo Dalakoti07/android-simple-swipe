@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/btn_close_dialog"
         android:text="close"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
