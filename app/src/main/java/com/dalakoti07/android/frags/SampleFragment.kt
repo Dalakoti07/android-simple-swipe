@@ -7,15 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.dalakoti07.android.R
 
-class SampleFragment: Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return layoutInflater.inflate(R.layout.fragment_sample, container, false)
-    }
+class SampleFragment: Fragment(R.layout.fragment_sample) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
