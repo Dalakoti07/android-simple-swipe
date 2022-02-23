@@ -11,14 +11,19 @@
         <action
             android:id="@+id/action_sampleFragment_to_sampleBottomSheet"
             app:destination="@id/sampleBottomSheet" />
+        <action
+            android:id="@+id/action_sampleFragment_to_sampleDialogFragment"
+            app:destination="@id/sampleDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/sampleBottomSheet"
         android:name="com.dalakoti07.android.frags.SampleBottomSheet"
         android:label="SampleBottomSheet" >
         <action
-            android:id="@+id/action_sampleBottomSheet_to_sampleDialogFragment"
-            app:destination="@id/sampleDialogFragment" />
+            app:popUpTo="@id/sampleFragment"
+            app:popUpToInclusive="false"
+            android:id="@+id/action_sampleBottomSheet_self2"
+            app:destination="@id/sampleFragment" />
     </dialog>
     <dialog
         android:id="@+id/sampleDialogFragment"

@@ -22,9 +22,12 @@ class SampleBottomSheet: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_open_dialog.setOnClickListener {
-            dismiss()
             findNavController().navigate(
-                R.id.action_sampleBottomSheet_to_sampleDialogFragment
+                R.id.action_sampleBottomSheet_self2
+            )
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                "ORDER_ITEMS_ARGUMENT_KEY",
+                true
             )
         }
     }

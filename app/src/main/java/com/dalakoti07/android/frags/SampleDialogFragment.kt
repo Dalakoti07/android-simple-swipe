@@ -16,12 +16,4 @@ class SampleDialogFragment : DialogFragment(R.layout.fragment_dialog){
         }
     }
 
-    override fun dismiss() {
-        findNavController().previousBackStackEntry?.savedStateHandle?.set(
-            "ORDER_ITEMS_ARGUMENT_KEY",
-            "hello"
-        )
-        super.dismiss()
-    }
-
 }
