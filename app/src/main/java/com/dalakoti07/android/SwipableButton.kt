@@ -1,6 +1,5 @@
 package com.dalakoti07.android
 
-import android.R.color
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
@@ -10,7 +9,6 @@ import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import com.dalakoti07.android.databinding.LayoutSwipableButtonBinding
-
 
 private const val TAG = "SwipableButton"
 
