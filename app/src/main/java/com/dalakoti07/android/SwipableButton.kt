@@ -1,6 +1,8 @@
 package com.dalakoti07.android
 
+import android.R.color
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import com.dalakoti07.android.databinding.LayoutSwipableButtonBinding
+
 
 private const val TAG = "SwipableButton"
 
@@ -29,7 +32,12 @@ class SwipeButtonView(
     private var isDisabled = false
 
     init {
+        val gradientDrawable = GradientDrawable()
+        gradientDrawable.shape = GradientDrawable.RECTANGLE
+        gradientDrawable.setColor(context.resources.getColor(R.color.colorPrimary)) // Set the desired color
 
+        gradientDrawable.cornerRadius = 100f // Set the desired corner radius in pixels
+        binding.llContainer.background = gradientDrawable
     }
 
     private fun checkIfCurrentXCoordinatesLiesInsideIcon(current: Float): Boolean{

@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    tools:layout_gravity="center"
+    tools:layout_marginStart="20dp"
+    tools:layout_marginEnd="20dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="horizontal"
-        android:id="@+id/llContainer"
         android:background="@color/colorPrimary"
-        android:padding="20dp"
+        android:id="@+id/llContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#fff"
-            android:text="PAY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="10dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="#FFFF"
+            android:text="PAY"
             android:id="@+id/centerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -29,12 +33,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:layout_gravity="center|start"
+        android:layout_marginStart="20dp"
+        android:layout_gravity="start|center_vertical"
         android:id="@+id/icIcon"
-        app:tint="#fff"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/baseline_navigate_next_24"
+        android:backgroundTint="#FFFF"
         android:layout_width="32dp"
         android:layout_height="32dp"/>
+
 </FrameLayout>
