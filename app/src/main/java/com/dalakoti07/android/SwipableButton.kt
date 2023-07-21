@@ -1,6 +1,7 @@
 package com.dalakoti07.android
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.util.Log
@@ -33,10 +34,20 @@ class SwipeButtonView(
     init {
         val gradientDrawable = GradientDrawable()
         gradientDrawable.shape = GradientDrawable.RECTANGLE
-        gradientDrawable.setColor(context.resources.getColor(R.color.colorPrimary)) // Set the desired color
+        val typedArray = context.obtainStyledAttributes(attrs,R.styleable.SwipeButtonView)
+        val primaryColor = typedArray.getColor(R.styleable.SwipeButtonView_primaryColor,resources.getColor(R.color.colorPrimaryDark))
+        val secondaryColor = typedArray.getColor(R.styleable.SwipeButtonView_secondaryColor,resources.getColor(R.color.colorPrimary))
+        val centerText = typedArray.getString(R.styleable.SwipeButtonView_centerText)
 
+        // set the values from style attrs
+        gradientDrawable.setColor(secondaryColor)
+        binding.centerText.setTextColor(primaryColor)
+        binding.centerText.text = centerText
         gradientDrawable.cornerRadius = 20f // Set the desired corner radius in pixels
         binding.llContainer.background = gradientDrawable
+        binding.icIcon.backgroundTintList = ColorStateList.valueOf(primaryColor)
+
+        typedArray.recycle()
     }
 
     private fun checkIfCurrentXCoordinatesLiesInsideIcon(current: Float): Boolean{
