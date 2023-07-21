@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.dalakoti07.android.SwipeButtonView
+    <com.dalakoti07.android.SwipeButtonLeftToRight
         android:layout_marginTop="40dp"
         app:centerText="Navigate"
         app:primaryColor="#2C66E3"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <com.dalakoti07.android.SwipeButtonView
+    <com.dalakoti07.android.SwipeButtonLeftToRight
         android:layout_marginTop="30dp"
         app:centerText="Swipe to mark it Arrived"
         app:primaryColor="#333333"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <com.dalakoti07.android.SwipeButtonView
+    <com.dalakoti07.android.SwipeButtonLeftToRight
         android:layout_marginTop="30dp"
         app:centerText="Mark Stop / Add Stop"
         app:primaryColor="#f6b200"

@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <declare-styleable name="SwipeButtonView">
+    <declare-styleable name="SwipeButtonLeftToRight">
         <attr name="primaryColor" format="color"/>
         <attr name="secondaryColor" format="color"/>
         <attr name="centerText" format="string"/>

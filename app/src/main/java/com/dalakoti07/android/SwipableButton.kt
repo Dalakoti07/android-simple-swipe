@@ -9,12 +9,11 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import com.dalakoti07.android.databinding.LayoutSwipableButtonBinding
 
 private const val TAG = "SwipableButton"
 
-class SwipeButtonView(
+class SwipeButtonLeftToRight(
     context: Context, attrs: AttributeSet? = null,
 ) : FrameLayout(context, attrs) {
 
@@ -34,10 +33,10 @@ class SwipeButtonView(
     init {
         val gradientDrawable = GradientDrawable()
         gradientDrawable.shape = GradientDrawable.RECTANGLE
-        val typedArray = context.obtainStyledAttributes(attrs,R.styleable.SwipeButtonView)
-        val primaryColor = typedArray.getColor(R.styleable.SwipeButtonView_primaryColor,resources.getColor(R.color.colorPrimaryDark))
-        val secondaryColor = typedArray.getColor(R.styleable.SwipeButtonView_secondaryColor,resources.getColor(R.color.colorPrimary))
-        val centerText = typedArray.getString(R.styleable.SwipeButtonView_centerText)
+        val typedArray = context.obtainStyledAttributes(attrs,R.styleable.SwipeButtonLeftToRight)
+        val primaryColor = typedArray.getColor(R.styleable.SwipeButtonLeftToRight_primaryColor,resources.getColor(R.color.colorPrimaryDark))
+        val secondaryColor = typedArray.getColor(R.styleable.SwipeButtonLeftToRight_secondaryColor,resources.getColor(R.color.colorPrimary))
+        val centerText = typedArray.getString(R.styleable.SwipeButtonLeftToRight_centerText)
 
         // set the values from style attrs
         gradientDrawable.setColor(secondaryColor)
