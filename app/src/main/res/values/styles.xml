@@ -8,9 +8,15 @@
     </style>
 
     <declare-styleable name="SwipeButtonLeftToRight">
-        <attr name="primaryColor" format="color"/>
-        <attr name="secondaryColor" format="color"/>
-        <attr name="centerText" format="string"/>
+        <attr name="primaryColorLR" format="color"/>
+        <attr name="secondaryColorLR" format="color"/>
+        <attr name="centerTextLR" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeButtonRightToLeft">
+        <attr name="primaryColorRL" format="color"/>
+        <attr name="secondaryColorRL" format="color"/>
+        <attr name="centerTextRL" format="string"/>
     </declare-styleable>
 
 </resources>

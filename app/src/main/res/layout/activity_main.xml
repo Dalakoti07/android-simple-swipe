@@ -10,9 +10,9 @@
 
     <com.dalakoti07.android.SwipeButtonLeftToRight
         android:layout_marginTop="40dp"
-        app:centerText="Navigate"
-        app:primaryColor="#2C66E3"
-        app:secondaryColor="#cdd8f1"
+        app:centerTextLR="Navigate"
+        app:primaryColorLR="#2C66E3"
+        app:secondaryColorLR="#cdd8f1"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_width="match_parent"
@@ -21,9 +21,9 @@
 
     <com.dalakoti07.android.SwipeButtonLeftToRight
         android:layout_marginTop="30dp"
-        app:centerText="Swipe to mark it Arrived"
-        app:primaryColor="#333333"
-        app:secondaryColor="#cecece"
+        app:centerTextLR="Swipe to mark it Arrived"
+        app:primaryColorLR="#333333"
+        app:secondaryColorLR="#cecece"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_width="match_parent"
@@ -32,15 +32,35 @@
 
     <com.dalakoti07.android.SwipeButtonLeftToRight
         android:layout_marginTop="30dp"
-        app:centerText="Mark Stop / Add Stop"
-        app:primaryColor="#f6b200"
-        app:secondaryColor="#f5e8c4"
+        app:centerTextLR="Mark Stop / Add Stop"
+        app:primaryColorLR="#f6b200"
+        app:secondaryColorLR="#f5e8c4"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
+    <com.dalakoti07.android.SwipeButtonRightToLeft
+        android:layout_marginTop="30dp"
+        app:centerTextRL="Swipe to End Ride"
+        app:primaryColorRL="#ff3b30"
+        app:secondaryColorRL="#f7d0ce"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
+    <com.dalakoti07.android.SwipeButtonRightToLeft
+        android:layout_marginTop="30dp"
+        app:centerTextRL="Swipe to mark No Show"
+        app:primaryColorRL="#ff3b30"
+        app:secondaryColorRL="#f7d0ce"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

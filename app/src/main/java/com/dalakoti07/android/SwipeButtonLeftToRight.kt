@@ -9,16 +9,16 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
-import com.dalakoti07.android.databinding.LayoutSwipableButtonBinding
+import com.dalakoti07.android.databinding.LayoutSwipableLeftToRightBinding
 
-private const val TAG = "SwipableButton"
+private const val TAG = "SwipeButtonLeftToRight"
 
 class SwipeButtonLeftToRight(
     context: Context, attrs: AttributeSet? = null,
 ) : FrameLayout(context, attrs) {
 
-    private val binding: LayoutSwipableButtonBinding =
-        LayoutSwipableButtonBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding: LayoutSwipableLeftToRightBinding =
+        LayoutSwipableLeftToRightBinding.inflate(LayoutInflater.from(context), this, true)
 
     private var isButtonPressed = false
 
@@ -34,9 +34,9 @@ class SwipeButtonLeftToRight(
         val gradientDrawable = GradientDrawable()
         gradientDrawable.shape = GradientDrawable.RECTANGLE
         val typedArray = context.obtainStyledAttributes(attrs,R.styleable.SwipeButtonLeftToRight)
-        val primaryColor = typedArray.getColor(R.styleable.SwipeButtonLeftToRight_primaryColor,resources.getColor(R.color.colorPrimaryDark))
-        val secondaryColor = typedArray.getColor(R.styleable.SwipeButtonLeftToRight_secondaryColor,resources.getColor(R.color.colorPrimary))
-        val centerText = typedArray.getString(R.styleable.SwipeButtonLeftToRight_centerText)
+        val primaryColor = typedArray.getColor(R.styleable.SwipeButtonLeftToRight_primaryColorLR,resources.getColor(R.color.colorPrimaryDark))
+        val secondaryColor = typedArray.getColor(R.styleable.SwipeButtonLeftToRight_secondaryColorLR,resources.getColor(R.color.colorPrimary))
+        val centerText = typedArray.getString(R.styleable.SwipeButtonLeftToRight_centerTextLR)
 
         // set the values from style attrs
         gradientDrawable.setColor(secondaryColor)
@@ -121,6 +121,7 @@ class SwipeButtonLeftToRight(
     private fun showFinalState() {
         binding.icIcon.x = (parentTotalWidth - 150).toFloat()
         binding.centerText.isInvisible = true
+        // just to give disabledEffect
         binding.llContainer.alpha = 0.9f
         isDisabled = true
     }
