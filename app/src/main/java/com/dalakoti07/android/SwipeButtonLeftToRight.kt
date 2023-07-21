@@ -42,7 +42,7 @@ class SwipeButtonLeftToRight(
         gradientDrawable.setColor(secondaryColor)
         binding.centerText.setTextColor(primaryColor)
         binding.centerText.text = centerText
-        gradientDrawable.cornerRadius = 20f // Set the desired corner radius in pixels
+        gradientDrawable.cornerRadius = Constants.cornerRadius // Set the desired corner radius in pixels
         binding.llContainer.background = gradientDrawable
         binding.icIcon.backgroundTintList = ColorStateList.valueOf(primaryColor)
 
@@ -57,7 +57,6 @@ class SwipeButtonLeftToRight(
         return false
     }
 
-    // icons start at 97
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if(isDisabled) return true
         val x = event.x
@@ -119,7 +118,7 @@ class SwipeButtonLeftToRight(
     }
 
     private fun showFinalState() {
-        binding.icIcon.x = (parentTotalWidth - 150).toFloat()
+        binding.icIcon.x = (parentTotalWidth - buttonWidth - Constants.iconOffsetMargin).toFloat()
         binding.centerText.isInvisible = true
         // just to give disabledEffect
         binding.llContainer.alpha = 0.9f
