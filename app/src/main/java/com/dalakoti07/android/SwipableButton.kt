@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.dalakoti07.android.databinding.LayoutSwipableButtonBinding
 
 private const val TAG = "SwipableButton"
@@ -25,7 +26,7 @@ class SwipeButtonView(
     private var buttonInitialOffsetFromLeft = 0
     private var lastTouchXCoordinate = 0f
 
-    private var parentEndXCoordinate = 0
+    private var parentTotalWidth = 0
 
     private var isDisabled = false
 
@@ -34,7 +35,7 @@ class SwipeButtonView(
         gradientDrawable.shape = GradientDrawable.RECTANGLE
         gradientDrawable.setColor(context.resources.getColor(R.color.colorPrimary)) // Set the desired color
 
-        gradientDrawable.cornerRadius = 100f // Set the desired corner radius in pixels
+        gradientDrawable.cornerRadius = 20f // Set the desired corner radius in pixels
         binding.llContainer.background = gradientDrawable
     }
 
@@ -58,22 +59,22 @@ class SwipeButtonView(
                 if (isButtonPressed) {
                     Log.d(TAG, "onTouchEvent: lastX = $lastTouchXCoordinate")
                     Log.d(TAG, "onTouchEvent x: $x")
-                    Log.d(TAG, "parent end: $parentEndXCoordinate")
+                    Log.d(TAG, "parent end: $parentTotalWidth")
 
                     binding.icIcon.x = x
+                    changeAlphaAsPerXValue(x)
                     // if we are 80% there perform click
-                    if (x >= parentEndXCoordinate*0.8) {
+                    if (x >= parentTotalWidth*0.8) {
                         isButtonPressed = false
                         performClick()
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
-                if (x >= parentEndXCoordinate*0.8) {
+                if (x >= parentTotalWidth*0.8) {
                     isButtonPressed = false
                     performClick()
                 }else{
-                    // todo set it to start
                     isButtonPressed = false
                     showInitialState()
                 }
@@ -82,6 +83,16 @@ class SwipeButtonView(
         lastTouchXCoordinate = x
 
         return true
+    }
+
+    private fun changeAlphaAsPerXValue(x: Float) {
+        val percentageOfWithCovered = x / parentTotalWidth
+        if(percentageOfWithCovered<0.4){
+            binding.centerText.isInvisible = false
+            binding.centerText.alpha = (0.5-(percentageOfWithCovered)).toFloat()
+        }else{
+            binding.centerText.isInvisible = true
+        }
     }
 
     override fun performClick(): Boolean {
@@ -94,10 +105,11 @@ class SwipeButtonView(
         binding.icIcon.x = buttonInitialOffsetFromLeft.toFloat()
         binding.centerText.isInvisible = false
         lastTouchXCoordinate= 0f
+        binding.centerText.alpha = 1f
     }
 
     private fun showFinalState() {
-        binding.icIcon.x = (parentEndXCoordinate - 100).toFloat()
+        binding.icIcon.x = (parentTotalWidth - 150).toFloat()
         binding.centerText.isInvisible = true
         binding.llContainer.alpha = 0.9f
         isDisabled = true
@@ -109,13 +121,13 @@ class SwipeButtonView(
             buttonInitialOffsetFromLeft = binding.icIcon.x.toInt()
         }
         buttonWidth = binding.icIcon.width
-        if(parentEndXCoordinate == 0){
-            parentEndXCoordinate = binding.root.width
+        if(parentTotalWidth == 0){
+            parentTotalWidth = binding.root.width
         }
         // onMeasure: icon start x: 55.0 icon end x: 970
         val intArr = intArrayOf(0,0)
         binding.icIcon.getLocationOnScreen(intArr)
-        Log.d(TAG, "onMeasure: icon start x: ${binding.icIcon.x} icon end x: $parentEndXCoordinate")
+        Log.d(TAG, "onMeasure: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
         Log.d(TAG, "onMeasure: icon y: ${binding.icIcon.y}")
         // 110 and 1143
         Log.d(TAG, "onMeasure: ${intArr[0]} and ${intArr[1]}")
