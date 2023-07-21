@@ -119,10 +119,11 @@ class SwipeButtonLeftToRight(
 
     private fun showFinalState() {
         binding.icIcon.x = (parentTotalWidth - buttonWidth - Constants.iconOffsetMargin).toFloat()
-        binding.centerText.isInvisible = true
+        binding.centerText.isInvisible = false
         // just to give disabledEffect
         binding.llContainer.alpha = 0.9f
         isDisabled = true
+        binding.centerText.alpha = Constants.alphaAfterAction
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
