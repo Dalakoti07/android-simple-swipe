@@ -1,4 +1,4 @@
-package com.dalakoti07.android
+package com.dalakoti.simpleswipe
 
 object Constants {
     const val iconOffsetMargin = 20

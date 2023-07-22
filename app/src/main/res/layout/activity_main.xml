@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.dalakoti07.android.SwipeButtonLeftToRight
+    <com.dalakoti.simpleswipe.SwipeButtonLeftToRight
         android:layout_marginTop="40dp"
         app:centerTextLR="Navigate"
         app:primaryColorLR="#2C66E3"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <com.dalakoti07.android.SwipeButtonLeftToRight
+    <com.dalakoti.simpleswipe.SwipeButtonLeftToRight
         android:layout_marginTop="30dp"
         app:centerTextLR="Swipe to mark it Arrived"
         app:primaryColorLR="#333333"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <com.dalakoti07.android.SwipeButtonLeftToRight
+    <com.dalakoti.simpleswipe.SwipeButtonLeftToRight
         android:layout_marginTop="30dp"
         app:centerTextLR="Mark Stop / Add Stop"
         app:primaryColorLR="#f6b200"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <com.dalakoti07.android.SwipeButtonRightToLeft
+    <com.dalakoti.simpleswipe.SwipeButtonRightToLeft
         android:layout_marginTop="30dp"
         app:centerTextRL="Swipe to End Ride"
         app:primaryColorRL="#ff3b30"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <com.dalakoti07.android.SwipeButtonRightToLeft
+    <com.dalakoti.simpleswipe.SwipeButtonRightToLeft
         android:layout_marginTop="30dp"
         app:centerTextRL="Swipe to mark No Show"
         app:primaryColorRL="#ff3b30"

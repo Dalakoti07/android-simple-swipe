@@ -1,4 +1,4 @@
-package com.dalakoti07.android
+package com.dalakoti.simpleswipe
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
-import com.dalakoti07.android.databinding.LayoutSwipableRightToLeftBinding
+import com.dalakoti.simpleswipe.databinding.LayoutSwipableRightToLeftBinding
 
 private const val TAG = "SwipeButtonRightToLeft"
 
