@@ -126,8 +126,9 @@ class SwipeButtonLeftToRight(
         binding.centerText.alpha = Constants.alphaAfterAction
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        Log.d(TAG, "onLayout: ...")
         if(buttonInitialOffsetFromLeft == 0){
             buttonInitialOffsetFromLeft = binding.icIcon.x.toInt()
         }
@@ -142,6 +143,11 @@ class SwipeButtonLeftToRight(
         Log.d(TAG, "onMeasure: icon y: ${binding.icIcon.y}")
         // 110 and 1143
         Log.d(TAG, "onMeasure: ${intArr[0]} and ${intArr[1]}")
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        // nothing
     }
 
 }
