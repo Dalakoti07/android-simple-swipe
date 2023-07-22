@@ -12,8 +12,10 @@
     <img src="/screenshots/Screenshot_20230722_155710.png" height="400px" />
 </div>
 
-## Recording
-https://github.com/Dalakoti07/android-simple-swipe/raw/master/screenshots/recording_swipe.webm
+Recording:
+
+https://github.com/Dalakoti07/android-simple-swipe/raw/master/screenshots/recording_swipe.mp4
+
 
 ## How to use library
 
