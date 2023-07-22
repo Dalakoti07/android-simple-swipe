@@ -13,7 +13,7 @@
 </div>
 
 ## Recording
-![Preview](screenshots/recording_swipe.webm)
+https://github.com/Dalakoti07/android-simple-swipe/raw/master/screenshots/recording_swipe.webm
 
 ## How to use library
 
