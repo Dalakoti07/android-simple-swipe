@@ -7,8 +7,10 @@
 - Swiping right to left
 
 ## Screenshots
-[Initial State](screenshots/Screenshot_20230722_155636.png)
-[Final State](screenshots/Screenshot_20230722_155710.png)
+<div style="display:flex | space-evenly;" >
+    <img src="/screenshots/Screenshot_20230722_155636.png" height="400px" />
+    <img src="/screenshots/Screenshot_20230722_155710.png" height="400px" />
+</div>
 
 ## Recording
 ![Preview](screenshots/recording_swipe.webm)
