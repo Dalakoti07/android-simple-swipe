@@ -142,14 +142,10 @@ class SwipeButtonRightToLeft(
         // onMeasure: icon start x: 55.0 icon end x: 970
         val intArr = intArrayOf(0,0)
         binding.icIcon.getLocationOnScreen(intArr)
-        Log.d(TAG, "onMeasure: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
-        Log.d(TAG, "onMeasure: icon y: ${binding.icIcon.y}")
+        Log.d(TAG, "onLayout: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
+        Log.d(TAG, "onLayout: icon y: ${binding.icIcon.y}")
         // 110 and 1143
-        Log.d(TAG, "onMeasure: ${intArr[0]} and ${intArr[1]}")
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        Log.d(TAG, "onLayout: ${intArr[0]} and ${intArr[1]}")
     }
 
 }
