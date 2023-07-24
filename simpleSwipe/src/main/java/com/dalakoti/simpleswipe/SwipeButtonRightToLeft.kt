@@ -70,8 +70,11 @@ class SwipeButtonRightToLeft(
                     Log.d(TAG, "onTouchEvent x: $x")
                     Log.d(TAG, "parent end: $parentTotalWidth")
 
-                    binding.icIcon.x = x
-                    changeAlphaAsPerXValue(x)
+                    // only if we touch before button starts then only change x
+                    if(x <= buttonInitialOffsetFromParentEnd){
+                        binding.icIcon.x = x
+                        changeAlphaAsPerXValue(x)
+                    }
                     // view is swipe to 20% or below on horizontal axis
                     if (x <= parentTotalWidth*0.2) {
                         isButtonPressed = false
