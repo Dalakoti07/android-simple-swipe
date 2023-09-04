@@ -73,14 +73,14 @@ class SwipeButtonLeftToRight(
                     binding.icIcon.x = x
                     changeAlphaAsPerXValue(x)
                     // if we are 80% there perform click
-                    if (x >= parentTotalWidth*0.8) {
+                    if (x >= parentTotalWidth * Constants.leftToRightSnapPercentage) {
                         isButtonPressed = false
                         performClick()
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
-                if (x >= parentTotalWidth*0.8) {
+                if (x >= parentTotalWidth * Constants.leftToRightSnapPercentage) {
                     isButtonPressed = false
                     performClick()
                 }else{

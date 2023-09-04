@@ -75,16 +75,16 @@ class SwipeButtonRightToLeft(
                         binding.icIcon.x = x
                         changeAlphaAsPerXValue(x)
                     }
-                    // view is swipe to 20% or below on horizontal axis
-                    if (x <= parentTotalWidth*0.2) {
+                    // view is swipe to 10% or below on horizontal axis
+                    if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
                         isButtonPressed = false
                         performClick()
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
-                if (x <= parentTotalWidth*0.2) {
-                    // view is swipe to 20% or below on horizontal axis
+                if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
+                    // view is swipe to 10% or below on horizontal axis
                     isButtonPressed = false
                     performClick()
                 }else{
