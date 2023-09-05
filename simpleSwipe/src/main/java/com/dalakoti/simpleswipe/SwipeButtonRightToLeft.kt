@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import com.dalakoti.simpleswipe.databinding.LayoutSwipableRightToLeftBinding
@@ -27,6 +29,7 @@ class SwipeButtonRightToLeft(
     private var lastTouchXCoordinate = 0f
 
     private var parentTotalWidth = 0
+    private var lastXCoordinateOfIcon = 0f
 
     private var isDisabled = false
 
@@ -72,6 +75,7 @@ class SwipeButtonRightToLeft(
 
                     // only if we touch before button starts then only change x
                     if(x <= buttonInitialOffsetFromParentEnd){
+                        lastXCoordinateOfIcon = x
                         binding.icIcon.x = x
                         changeAlphaAsPerXValue(x)
                     }
@@ -115,10 +119,32 @@ class SwipeButtonRightToLeft(
     }
 
     private fun showInitialState(){
-        binding.icIcon.x = buttonInitialOffsetFromParentEnd.toFloat()
-        binding.centerText.isInvisible = false
-        lastTouchXCoordinate= 0f
-        binding.centerText.alpha = 1f
+        val finalX = buttonInitialOffsetFromParentEnd.toFloat()
+        val iconAnimation = TranslateAnimation(
+            0f,
+            (parentTotalWidth - lastXCoordinateOfIcon - buttonWidth - Constants.iconOffsetMargin),
+            0f,
+            0f,
+        ).apply{
+            duration = Constants.animationDuration
+            isFillEnabled = true
+            setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    Log.d(TAG, "onAnimationStart .....")
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    Log.d(TAG, "onAnimationEnd .....")
+                    binding.icIcon.x = finalX
+                    binding.centerText.isInvisible = false
+                    lastTouchXCoordinate= 0f
+                    binding.centerText.alpha = 1f
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+        }
+        binding.icIcon.startAnimation(iconAnimation)
     }
 
     private fun showFinalState() {
@@ -142,6 +168,7 @@ class SwipeButtonRightToLeft(
         // onMeasure: icon start x: 55.0 icon end x: 970
         val intArr = intArrayOf(0,0)
         binding.icIcon.getLocationOnScreen(intArr)
+        Log.d(TAG, "offset: $buttonInitialOffsetFromParentEnd")
         Log.d(TAG, "onLayout: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
         Log.d(TAG, "onLayout: icon y: ${binding.icIcon.y}")
         // 110 and 1143

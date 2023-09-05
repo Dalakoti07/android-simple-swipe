@@ -10,6 +10,7 @@ object Constants {
 
     const val leftToRightSnapPercentage = 0.8
     const val rightToLeftSnapPercentage = 0.2
+    const val animationDuration = 200L
 }
 
 val Int.dpToPixel: Int

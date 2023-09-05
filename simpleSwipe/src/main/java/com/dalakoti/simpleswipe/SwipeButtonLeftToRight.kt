@@ -36,8 +36,6 @@ class SwipeButtonLeftToRight(
 
     private var lastXCoordinateOfIcon = 0f
 
-    private val animationDuration = 200L
-
     init {
         val gradientDrawable = GradientDrawable()
         gradientDrawable.shape = GradientDrawable.RECTANGLE
@@ -132,7 +130,7 @@ class SwipeButtonLeftToRight(
             0f,
             0f
         ).apply {
-            duration = animationDuration
+            duration = Constants.animationDuration
             isFillEnabled = true
             setAnimationListener(object: AnimationListener{
                 override fun onAnimationStart(animation: Animation?) {
@@ -163,7 +161,7 @@ class SwipeButtonLeftToRight(
             0f,
             0f,
         ).apply{
-            duration = animationDuration
+            duration = Constants.animationDuration
             isFillEnabled = true
             setAnimationListener(object: AnimationListener{
                 override fun onAnimationStart(animation: Animation?) {
