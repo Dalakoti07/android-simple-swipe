@@ -5,6 +5,6 @@ object Constants {
     const val cornerRadius = 20f
     const val alphaAfterAction = 0.3f
 
-    const val leftToRightSnapPercentage = 0.9
-    const val rightToLeftSnapPercentage = 0.01
+    const val leftToRightSnapPercentage = 0.8
+    const val rightToLeftSnapPercentage = 0.2
 }

@@ -96,9 +96,9 @@ class SwipeButtonLeftToRight(
 
     private fun changeAlphaAsPerXValue(x: Float) {
         val percentageOfWithCovered = x / parentTotalWidth
-        if(percentageOfWithCovered<0.4){
+        if(percentageOfWithCovered<0.9){
             binding.centerText.isInvisible = false
-            binding.centerText.alpha = (0.5-(percentageOfWithCovered)).toFloat()
+            binding.centerText.alpha = 1f-percentageOfWithCovered
         }else{
             binding.centerText.isInvisible = true
         }
