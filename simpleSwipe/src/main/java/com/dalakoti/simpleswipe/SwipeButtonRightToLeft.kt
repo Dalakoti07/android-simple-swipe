@@ -81,6 +81,7 @@ class SwipeButtonRightToLeft(
                     }
                     // view is swipe to 10% or below on horizontal axis
                     if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
+                        lastXCoordinateOfIcon = x
                         isButtonPressed = false
                         performClick()
                     }
@@ -148,12 +149,35 @@ class SwipeButtonRightToLeft(
     }
 
     private fun showFinalState() {
-        binding.icIcon.x = (Constants.iconOffsetMargin).toFloat()
-        binding.centerText.isInvisible = false
-        // just to give disabledEffect
-        binding.llContainer.alpha = 0.9f
-        isDisabled = true
-        binding.centerText.alpha = Constants.alphaAfterAction
+        Log.d(TAG, "showFinalState .... $lastXCoordinateOfIcon")
+        val finalX = (Constants.iconOffsetMargin).toFloat()
+        val iconAnimation = TranslateAnimation(
+            0f,
+            -(lastXCoordinateOfIcon),
+            0f,
+            0f,
+        ).apply{
+            duration = Constants.animationDuration
+            isFillEnabled = true
+            setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    Log.d(TAG, "onAnimationStart .....")
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    Log.d(TAG, "onAnimationEnd .....")
+                    binding.icIcon.x = finalX
+                    binding.centerText.isInvisible = false
+                    // just to give disabledEffect
+                    binding.llContainer.alpha = 0.9f
+                    isDisabled = true
+                    binding.centerText.alpha = Constants.alphaAfterAction
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+        }
+        binding.icIcon.startAnimation(iconAnimation)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
