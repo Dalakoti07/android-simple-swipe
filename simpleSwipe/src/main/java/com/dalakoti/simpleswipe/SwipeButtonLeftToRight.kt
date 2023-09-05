@@ -50,7 +50,7 @@ class SwipeButtonLeftToRight(
         gradientDrawable.setColor(secondaryColor)
         binding.centerText.setTextColor(primaryColor)
         binding.centerText.text = centerText
-        gradientDrawable.cornerRadius = Constants.cornerRadius // Set the desired corner radius in pixels
+        gradientDrawable.cornerRadius = Constants.cornerRadius.dpToPixel.toFloat() // Set the desired corner radius in pixels
         binding.llContainer.background = gradientDrawable
         binding.icIcon.backgroundTintList = ColorStateList.valueOf(primaryColor)
 
