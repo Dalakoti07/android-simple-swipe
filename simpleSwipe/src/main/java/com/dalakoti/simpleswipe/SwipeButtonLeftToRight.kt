@@ -86,15 +86,19 @@ class SwipeButtonLeftToRight(
                     // if we are 80% there perform click
                     Log.d(TAG, "onTouchEvent: threshold -> ${parentTotalWidth * Constants.leftToRightSnapPercentage}")
                     if (x+buttonWidth >= parentTotalWidth * Constants.leftToRightSnapPercentage) {
-                        isButtonPressed = false
-                        performClick()
+                        if(isButtonPressed){
+                            isButtonPressed = false
+                            performClick()
+                        }
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
                 if (x >= parentTotalWidth * Constants.leftToRightSnapPercentage) {
-                    isButtonPressed = false
-                    performClick()
+                    if(isButtonPressed){
+                        isButtonPressed = false
+                        performClick()
+                    }
                 }else{
                     isButtonPressed = false
                     showInitialState()

@@ -73,25 +73,28 @@ class SwipeButtonRightToLeft(
                     Log.d(TAG, "onTouchEvent x: $x")
                     Log.d(TAG, "parent end: $parentTotalWidth")
 
+                    lastXCoordinateOfIcon = x
                     // only if we touch before button starts then only change x
                     if(x <= buttonInitialOffsetFromParentEnd){
-                        lastXCoordinateOfIcon = x
                         binding.icIcon.x = x
                         changeAlphaAsPerXValue(x)
                     }
                     // view is swipe to 10% or below on horizontal axis
                     if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
-                        lastXCoordinateOfIcon = x
-                        isButtonPressed = false
-                        performClick()
+                        if(isButtonPressed){
+                            isButtonPressed = false
+                            performClick()
+                        }
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
                 if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
                     // view is swipe to 10% or below on horizontal axis
-                    isButtonPressed = false
-                    performClick()
+                    if(isButtonPressed){
+                        isButtonPressed = false
+                        performClick()
+                    }
                 }else{
                     isButtonPressed = false
                     showInitialState()
