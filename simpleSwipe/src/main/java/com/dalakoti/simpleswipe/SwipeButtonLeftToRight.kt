@@ -78,6 +78,10 @@ class SwipeButtonLeftToRight(
                     Log.d(TAG, "onTouchEvent x: $x")
                     Log.d(TAG, "parent end: $parentTotalWidth")
 
+                    if(x<buttonInitialOffsetFromLeft){
+                        return true
+                    }
+
                     binding.icIcon.x = x
                     lastXCoordinateOfIcon = x
                     changeAlphaAsPerXValue(x)
@@ -124,7 +128,7 @@ class SwipeButtonLeftToRight(
         Log.d(TAG, "showInitialState ....")
         val iconAnimation = TranslateAnimation(
             0f,
-            -(lastXCoordinateOfIcon),
+            -(lastXCoordinateOfIcon-buttonInitialOffsetFromLeft),
             0f,
             0f
         ).apply {
