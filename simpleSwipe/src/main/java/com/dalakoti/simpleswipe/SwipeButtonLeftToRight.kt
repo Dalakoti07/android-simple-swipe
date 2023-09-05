@@ -73,7 +73,8 @@ class SwipeButtonLeftToRight(
                     binding.icIcon.x = x
                     changeAlphaAsPerXValue(x)
                     // if we are 80% there perform click
-                    if (x >= parentTotalWidth * Constants.leftToRightSnapPercentage) {
+                    Log.d(TAG, "onTouchEvent: threshold -> ${parentTotalWidth * Constants.leftToRightSnapPercentage}")
+                    if (x+buttonWidth >= parentTotalWidth * Constants.leftToRightSnapPercentage) {
                         isButtonPressed = false
                         performClick()
                     }
@@ -139,7 +140,7 @@ class SwipeButtonLeftToRight(
         // onMeasure: icon start x: 55.0 icon end x: 970
         val intArr = intArrayOf(0,0)
         binding.icIcon.getLocationOnScreen(intArr)
-        Log.d(TAG, "onLayout: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
+        Log.d(TAG, "onLayout: icon start x: ${binding.icIcon.x} and parent width: $parentTotalWidth")
         Log.d(TAG, "onLayout: icon y: ${binding.icIcon.y}")
         // 110 and 1143
         Log.d(TAG, "onLayout: ${intArr[0]} and ${intArr[1]}")
