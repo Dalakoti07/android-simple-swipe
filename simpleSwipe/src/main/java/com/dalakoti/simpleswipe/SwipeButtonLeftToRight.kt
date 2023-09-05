@@ -7,6 +7,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
+import android.view.animation.TranslateAnimation
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import com.dalakoti.simpleswipe.databinding.LayoutSwipableLeftToRightBinding
@@ -25,10 +28,15 @@ class SwipeButtonLeftToRight(
     private var buttonWidth = 0
     private var buttonInitialOffsetFromLeft = 0
     private var lastTouchXCoordinate = 0f
+    private var yCoordinateOfIcon = 0f
 
     private var parentTotalWidth = 0
 
     private var isDisabled = false
+
+    private var lastXCoordinateOfIcon = 0f
+
+    private val animationDuration = 200L
 
     init {
         val gradientDrawable = GradientDrawable()
@@ -71,6 +79,7 @@ class SwipeButtonLeftToRight(
                     Log.d(TAG, "parent end: $parentTotalWidth")
 
                     binding.icIcon.x = x
+                    lastXCoordinateOfIcon = x
                     changeAlphaAsPerXValue(x)
                     // if we are 80% there perform click
                     Log.d(TAG, "onTouchEvent: threshold -> ${parentTotalWidth * Constants.leftToRightSnapPercentage}")
@@ -112,19 +121,65 @@ class SwipeButtonLeftToRight(
     }
 
     private fun showInitialState(){
-        binding.icIcon.x = buttonInitialOffsetFromLeft.toFloat()
-        binding.centerText.isInvisible = false
-        lastTouchXCoordinate= 0f
-        binding.centerText.alpha = 1f
+        Log.d(TAG, "showInitialState ....")
+        val iconAnimation = TranslateAnimation(
+            0f,
+            -(lastXCoordinateOfIcon),
+            0f,
+            0f
+        ).apply {
+            duration = animationDuration
+            isFillEnabled = true
+            setAnimationListener(object: AnimationListener{
+                override fun onAnimationStart(animation: Animation?) {
+                    Log.d(TAG, "onAnimationStart .....")
+                }
+                override fun onAnimationEnd(animation: Animation?) {
+                    Log.d(TAG, "onAnimationEnd .....")
+                    binding.icIcon.x = buttonInitialOffsetFromLeft.toFloat()
+                    binding.centerText.isInvisible = false
+                    lastTouchXCoordinate= 0f
+                    binding.centerText.alpha = 1f
+                }
+                override fun onAnimationRepeat(animation: Animation?) {
+                    Log.d(TAG, "onAnimationRepeat .....")
+                }
+            })
+        }
+        binding.icIcon.startAnimation(iconAnimation)
     }
 
     private fun showFinalState() {
-        binding.icIcon.x = (parentTotalWidth - buttonWidth - Constants.iconOffsetMargin).toFloat()
-        binding.centerText.isInvisible = false
-        // just to give disabledEffect
-        binding.llContainer.alpha = 0.9f
-        isDisabled = true
-        binding.centerText.alpha = Constants.alphaAfterAction
+        Log.d(TAG, "showFinalState ....")
+        val finalX = (parentTotalWidth - buttonWidth - Constants.iconOffsetMargin).toFloat()
+        // From X,To X, From Y, To Y
+        val iconAnimation = TranslateAnimation(
+            0f,
+            finalX-lastXCoordinateOfIcon,
+            0f,
+            0f,
+        ).apply{
+            duration = animationDuration
+            isFillEnabled = true
+            setAnimationListener(object: AnimationListener{
+                override fun onAnimationStart(animation: Animation?) {
+                    Log.d(TAG, "onAnimationStart .....")
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    Log.d(TAG, "onAnimationEnd .....")
+                    binding.icIcon.x = finalX
+                    binding.centerText.isInvisible = false
+                    // just to give disabledEffect
+                    binding.llContainer.alpha = 0.9f
+                    isDisabled = true
+                    binding.centerText.alpha = Constants.alphaAfterAction
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+        }
+        binding.icIcon.startAnimation(iconAnimation)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -144,6 +199,7 @@ class SwipeButtonLeftToRight(
         Log.d(TAG, "onLayout: icon y: ${binding.icIcon.y}")
         // 110 and 1143
         Log.d(TAG, "onLayout: ${intArr[0]} and ${intArr[1]}")
+        yCoordinateOfIcon = intArr[1].toFloat()
     }
 
 }
