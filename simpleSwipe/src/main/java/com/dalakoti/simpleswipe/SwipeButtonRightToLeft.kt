@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.animation.Animation
+import android.view.animation.TranslateAnimation
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import com.dalakoti.simpleswipe.databinding.LayoutSwipableRightToLeftBinding
@@ -27,6 +29,7 @@ class SwipeButtonRightToLeft(
     private var lastTouchXCoordinate = 0f
 
     private var parentTotalWidth = 0
+    private var lastXCoordinateOfIcon = 0f
 
     private var isDisabled = false
 
@@ -42,7 +45,7 @@ class SwipeButtonRightToLeft(
         gradientDrawable.setColor(secondaryColor)
         binding.centerText.setTextColor(primaryColor)
         binding.centerText.text = centerText
-        gradientDrawable.cornerRadius = Constants.cornerRadius // Set the desired corner radius in pixels
+        gradientDrawable.cornerRadius = Constants.cornerRadius.dpToPixel.toFloat() // Set the desired corner radius in pixels
         binding.llContainer.background = gradientDrawable
         binding.icIcon.backgroundTintList = ColorStateList.valueOf(primaryColor)
 
@@ -70,20 +73,28 @@ class SwipeButtonRightToLeft(
                     Log.d(TAG, "onTouchEvent x: $x")
                     Log.d(TAG, "parent end: $parentTotalWidth")
 
-                    binding.icIcon.x = x
-                    changeAlphaAsPerXValue(x)
-                    // view is swipe to 20% or below on horizontal axis
-                    if (x <= parentTotalWidth*0.2) {
-                        isButtonPressed = false
-                        performClick()
+                    lastXCoordinateOfIcon = x
+                    // only if we touch before button starts then only change x
+                    if(x <= buttonInitialOffsetFromParentEnd){
+                        binding.icIcon.x = x
+                        changeAlphaAsPerXValue(x)
+                    }
+                    // view is swipe to 10% or below on horizontal axis
+                    if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
+                        if(isButtonPressed){
+                            isButtonPressed = false
+                            performClick()
+                        }
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
-                if (x <= parentTotalWidth*0.2) {
-                    // view is swipe to 20% or below on horizontal axis
-                    isButtonPressed = false
-                    performClick()
+                if (x <= parentTotalWidth * Constants.rightToLeftSnapPercentage) {
+                    // view is swipe to 10% or below on horizontal axis
+                    if(isButtonPressed){
+                        isButtonPressed = false
+                        performClick()
+                    }
                 }else{
                     isButtonPressed = false
                     showInitialState()
@@ -97,9 +108,9 @@ class SwipeButtonRightToLeft(
 
     private fun changeAlphaAsPerXValue(x: Float) {
         val percentageOfWithCovered = x / parentTotalWidth
-        if(percentageOfWithCovered>0.5){
+        if(percentageOfWithCovered>0.1){
             binding.centerText.isInvisible = false
-            binding.centerText.alpha = (1-(percentageOfWithCovered))
+            binding.centerText.alpha = percentageOfWithCovered
         }else{
             binding.centerText.isInvisible = true
         }
@@ -112,19 +123,64 @@ class SwipeButtonRightToLeft(
     }
 
     private fun showInitialState(){
-        binding.icIcon.x = buttonInitialOffsetFromParentEnd.toFloat()
-        binding.centerText.isInvisible = false
-        lastTouchXCoordinate= 0f
-        binding.centerText.alpha = 1f
+        val finalX = buttonInitialOffsetFromParentEnd.toFloat()
+        val iconAnimation = TranslateAnimation(
+            0f,
+            (parentTotalWidth - lastXCoordinateOfIcon - buttonWidth - Constants.iconOffsetMargin),
+            0f,
+            0f,
+        ).apply{
+            duration = Constants.animationDuration
+            isFillEnabled = true
+            setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    Log.d(TAG, "onAnimationStart .....")
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    Log.d(TAG, "onAnimationEnd .....")
+                    binding.icIcon.x = finalX
+                    binding.centerText.isInvisible = false
+                    lastTouchXCoordinate= 0f
+                    binding.centerText.alpha = 1f
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+        }
+        binding.icIcon.startAnimation(iconAnimation)
     }
 
     private fun showFinalState() {
-        binding.icIcon.x = (Constants.iconOffsetMargin).toFloat()
-        binding.centerText.isInvisible = false
-        // just to give disabledEffect
-        binding.llContainer.alpha = 0.9f
-        isDisabled = true
-        binding.centerText.alpha = Constants.alphaAfterAction
+        Log.d(TAG, "showFinalState .... $lastXCoordinateOfIcon")
+        val finalX = (Constants.iconOffsetMargin).toFloat()
+        val iconAnimation = TranslateAnimation(
+            0f,
+            -(lastXCoordinateOfIcon),
+            0f,
+            0f,
+        ).apply{
+            duration = Constants.animationDuration
+            isFillEnabled = true
+            setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    Log.d(TAG, "onAnimationStart .....")
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    Log.d(TAG, "onAnimationEnd .....")
+                    binding.icIcon.x = finalX
+                    binding.centerText.isInvisible = false
+                    // just to give disabledEffect
+                    binding.llContainer.alpha = 0.9f
+                    isDisabled = true
+                    binding.centerText.alpha = Constants.alphaAfterAction
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+        }
+        binding.icIcon.startAnimation(iconAnimation)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -139,14 +195,11 @@ class SwipeButtonRightToLeft(
         // onMeasure: icon start x: 55.0 icon end x: 970
         val intArr = intArrayOf(0,0)
         binding.icIcon.getLocationOnScreen(intArr)
-        Log.d(TAG, "onMeasure: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
-        Log.d(TAG, "onMeasure: icon y: ${binding.icIcon.y}")
+        Log.d(TAG, "offset: $buttonInitialOffsetFromParentEnd")
+        Log.d(TAG, "onLayout: icon start x: ${binding.icIcon.x} icon end x: $parentTotalWidth")
+        Log.d(TAG, "onLayout: icon y: ${binding.icIcon.y}")
         // 110 and 1143
-        Log.d(TAG, "onMeasure: ${intArr[0]} and ${intArr[1]}")
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        Log.d(TAG, "onLayout: ${intArr[0]} and ${intArr[1]}")
     }
 
 }
